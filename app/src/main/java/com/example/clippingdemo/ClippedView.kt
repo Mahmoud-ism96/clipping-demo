@@ -227,6 +227,14 @@ class ClippedView @JvmOverloads constructor(
         canvas.restore()
     }
     private fun drawSkewedTextExample(canvas: Canvas) {
+        canvas.save()
+        paint.color = Color.YELLOW
+        paint.textAlign = Paint.Align.RIGHT
+        canvas.translate(columnTwo, textRow)
+        canvas.skew(0.5f, -0.5f)
+        canvas.drawText(context.getString(R.string.skewed),
+            clipRectLeft, clipRectTop, paint)
+        canvas.restore()
     }
 //    private fun drawQuickRejectExample(canvas: Canvas) {
 //    }
