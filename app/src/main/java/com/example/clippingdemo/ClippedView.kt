@@ -175,14 +175,14 @@ class ClippedView @JvmOverloads constructor(
         canvas.translate(columnOne, rowThree)
         path.rewind()
         path.addCircle(
-            clipRectLeft + rectInset + circleRadius,
+            clipRectLeft + circleRadius,
             clipRectTop + circleRadius + rectInset,
             circleRadius,Path.Direction.CCW
         )
         path.addRect(
-            clipRectRight / 2 - circleRadius,
+            clipRectLeft + circleRadius + rectInset,
             clipRectTop + circleRadius + rectInset,
-            clipRectRight / 2 + circleRadius,
+            clipRectRight - rectInset,
             clipRectBottom - rectInset,Path.Direction.CCW
         )
         canvas.clipPath(path)
