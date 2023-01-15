@@ -86,8 +86,10 @@ class ClippedView @JvmOverloads constructor(
 
     private fun drawBackAndUnclippedRectangle(canvas: Canvas){
         canvas.drawColor(Color.GRAY)
+
         canvas.save()
         canvas.translate(columnOne,rowOne)
+        
         drawClippedRectangle(canvas)
         canvas.restore()
     }
@@ -115,10 +117,30 @@ class ClippedView @JvmOverloads constructor(
                 clipRectBottom - 4 * rectInset
             )
         }
+
         drawClippedRectangle(canvas)
         canvas.restore()
     }
     private fun drawCircularClippingExample(canvas: Canvas) {
+
+        canvas.save()
+        canvas.translate(columnOne, rowTwo)
+
+        path.rewind()
+
+        path.addCircle(
+            circleRadius,clipRectBottom - circleRadius,
+            circleRadius,Path.Direction.CCW
+        )
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+            canvas.clipPath(path, Region.Op.DIFFERENCE)
+        } else {
+            canvas.clipOutPath(path)
+        }
+
+        drawClippedRectangle(canvas)
+        canvas.restore()
     }
     private fun drawIntersectionClippingExample(canvas: Canvas) {
     }
@@ -132,7 +154,7 @@ class ClippedView @JvmOverloads constructor(
     }
     private fun drawSkewedTextExample(canvas: Canvas) {
     }
-    private fun drawQuickRejectExample(canvas: Canvas) {
-    }
+//    private fun drawQuickRejectExample(canvas: Canvas) {
+//    }
 
 }
